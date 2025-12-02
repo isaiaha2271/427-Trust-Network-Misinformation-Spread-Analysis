@@ -15,12 +15,20 @@ def main ():
   )
   print ("Loaded graph")
 
+  # Adds users to the graph
+  # G = helper.add_users(G, input="users.csv")
+  # print ("Loaded users")
+
   # print(list(G.edges(data=True)))
   # Output: [('NodeA', 'NodeB', {'sign': 1}), ('NodeB', 'NodeC', {'sign': -1}), ...]
 
-  # Visualizes the graph 
+  # Export
   helper.export_top_incoming_nodes(G, top_n=10)
-  helper.show_balanced_graph(G, max_nodes=100)
+  #  helper.export_users_by_id(G)
+  
+
+  # Visualizes the graph 
+  # helper.show_balanced_graph(G, max_nodes=100)
 
 
 

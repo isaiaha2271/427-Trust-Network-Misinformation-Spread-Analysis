@@ -3,15 +3,17 @@ import igraph as ig
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
-
+import requests
+import time
 
 import networkx as nx
 import matplotlib.pyplot as plt
 
-def show_balanced_graph(G: nx.DiGraph, sign_attribute='sign', max_nodes=None):
+
+def show_balanced_graph(G: nx.DiGraph, sign_attribute="sign", max_nodes=None):
     """
     Visualizes a signed directed graph with an optional node limit.
-    
+
     Parameters:
     - G: A networkx DiGraph object
     - sign_attribute: Key for the sign
@@ -27,37 +29,72 @@ def show_balanced_graph(G: nx.DiGraph, sign_attribute='sign', max_nodes=None):
         G = G.subgraph(nodes_to_keep)
 
     # Setup the layout
-    pos = nx.spring_layout(G, seed=42, k=1/np.sqrt(len(G.nodes())))
+    pos = nx.spring_layout(G, seed=42, k=1 / np.sqrt(len(G.nodes())))
 
     # Create the Plot
     plt.figure(figsize=(10, 8))
 
     # Draw Nodes
-    nx.draw_networkx_nodes(G, pos, node_size=300, node_color='lightblue', edgecolors='black')
+    nx.draw_networkx_nodes(
+        G, pos, node_size=300, node_color="lightblue", edgecolors="black"
+    )
 
     # Draw edges with different styles for positive/negative signs
-    edge_signs = nx.get_edge_attributes(G, 'sign')
+    edge_signs = nx.get_edge_attributes(G, "sign")
     if edge_signs:
-      pos_edges = [(u, v) for u, v in G.edges() if edge_signs.get((u, v), edge_signs.get((v, u), 1)) > 0]
-      neg_edges = [(u, v) for u, v in G.edges() if edge_signs.get((u, v), edge_signs.get((v, u), 1)) <= 0]
-      
-      nx.draw_networkx_edges(G, pos, edgelist=pos_edges, edge_color='lightgreen', 
-                            width=1, alpha=0.6, label='Positive')
-      nx.draw_networkx_edges(G, pos, edgelist=neg_edges, edge_color='red', 
-                            width=1, style='dashed', alpha=0.6, label='Negative')
-      plt.legend()
+        pos_edges = [
+            (u, v)
+            for u, v in G.edges()
+            if edge_signs.get((u, v), edge_signs.get((v, u), 1)) > 0
+        ]
+        neg_edges = [
+            (u, v)
+            for u, v in G.edges()
+            if edge_signs.get((u, v), edge_signs.get((v, u), 1)) <= 0
+        ]
+
+        nx.draw_networkx_edges(
+            G,
+            pos,
+            edgelist=pos_edges,
+            edge_color="lightgreen",
+            width=1,
+            alpha=0.6,
+            label="Positive",
+        )
+        nx.draw_networkx_edges(
+            G,
+            pos,
+            edgelist=neg_edges,
+            edge_color="red",
+            width=1,
+            style="dashed",
+            alpha=0.6,
+            label="Negative",
+        )
+        plt.legend()
     else:
-      nx.draw_networkx_edges(G, pos, alpha=0.4)
-    
+        nx.draw_networkx_edges(G, pos, alpha=0.4)
+
     nx.draw_networkx_labels(G, pos, font_size=8)
 
     # Final settings
     plt.title(f"Signed Graph ({len(G)} nodes)")
     plt.legend()
-    plt.axis('off')
+    plt.axis("off")
     plt.show()
 
-def export_top_incoming_nodes(G, output_file="node_analysis.csv", top_n=5, sign_attribute='sign'):
+def add_users(G: nx.DiGraph, input_path="users.csv"):
+    with open(input_path, 'r') as file:
+        for line in file:
+            info = list(line.split(' '))
+            G.nodes[info[0]]["username"]
+
+    return G
+
+def export_top_incoming_nodes(
+    G, output_file="node_analysis.csv", top_n=5, sign_attribute="sign"
+):
     """
     Identifies the top N nodes with the highest incoming positive and negative edges.
     Writes the results to a CSV file.
@@ -68,79 +105,147 @@ def export_top_incoming_nodes(G, output_file="node_analysis.csv", top_n=5, sign_
     - top_n: Number of top nodes to retrieve for each category
     - sign_attribute: The edge attribute key holding the sign (e.g., 'sign')
     """
-    
+
     # Dictionary to store stats per node
     # Structure: {node_id: {'pos_in': 0, 'neg_in': 0, 'total_in': 0}}
-    node_stats = {node: {'pos_in': 0, 'neg_in': 0} for node in G.nodes()}
+    node_stats = {node: {"pos_in": 0, "neg_in": 0} for node in G.nodes()}
 
     # 1. Iterate through all edges to count incoming signs
     # u -> v (u is source, v is destination)
     for u, v, data in G.edges(data=True):
         sign = data.get(sign_attribute, 0)
-        
+
         if sign > 0:
-            node_stats[v]['pos_in'] += 1
+            node_stats[v]["pos_in"] += 1
         elif sign < 0:
-            node_stats[v]['neg_in'] += 1
+            node_stats[v]["neg_in"] += 1
 
     # 2. Prepare lists for sorting
     analysis_list = []
     for node, stats in node_stats.items():
-        pos = stats['pos_in']
-        neg = stats['neg_in']
+        pos = stats["pos_in"]
+        neg = stats["neg_in"]
         total = pos + neg
-        
+
         # Calculate percentages (avoid division by zero)
         pos_pct = (pos / total * 100) if total > 0 else 0.0
         neg_pct = (neg / total * 100) if total > 0 else 0.0
-        
-        analysis_list.append({
-            'node': node,
-            'pos_in': pos,
-            'neg_in': neg,
-            'total_in': total,
-            'pos_pct': pos_pct,
-            'neg_pct': neg_pct
-        })
+
+        analysis_list.append(
+            {
+                "node": node,
+                "pos_in": pos,
+                "neg_in": neg,
+                "total_in": total,
+                "pos_pct": pos_pct,
+                "neg_pct": neg_pct,
+            }
+        )
 
     # Get Top N for Negative Incoming
     # Sort by 'neg_in' descending
-    top_negative = sorted(analysis_list, key=lambda x: x['neg_in'], reverse=True)[:top_n]
+    top_negative = sorted(analysis_list, key=lambda x: x["neg_in"], reverse=True)[
+        :top_n
+    ]
 
     # Get Top N for Positive Incoming
     # Sort by 'pos_in' descending
-    top_positive = sorted(analysis_list, key=lambda x: x['pos_in'], reverse=True)[:top_n]
+    top_positive = sorted(analysis_list, key=lambda x: x["pos_in"], reverse=True)[
+        :top_n
+    ]
 
     # Write to File
     print(f"Writing analysis to {output_file}...")
-    with open(output_file, mode='w', newline='') as f:
+    with open(output_file, mode="w", newline="") as f:
         writer = csv.writer(f)
-        
+
         # Section 1: Top Incoming Negative
-        writer.writerow([f"--- TOP {top_n} NODES WITH HIGHEST INCOMING NEGATIVE EDGES ---"])
-        writer.writerow(["Node", "Incoming Negative Count", "Negative Ratio (%)", "Total Incoming"])
+        writer.writerow(
+            [f"--- TOP {top_n} NODES WITH HIGHEST INCOMING NEGATIVE EDGES ---"]
+        )
+        writer.writerow(
+            ["Node", "Incoming Negative Count", "Negative Ratio (%)", "Total Incoming"]
+        )
         for item in top_negative:
-            writer.writerow([
-                item['node'], 
-                item['neg_in'], 
-                f"{item['neg_pct']:.2f}%", 
-                item['total_in']
-            ])
-            
-        writer.writerow([]) # Empty line for spacing
+            writer.writerow(
+                [
+                    get_username_by_id(item["node"]),
+                    item["node"],
+                    item["neg_in"],
+                    f"{item['neg_pct']:.2f}%",
+                    item["total_in"],
+                ]
+            )
+
+        writer.writerow([])  # Empty line for spacing
 
         # Section 2: Top Incoming Positive
-        writer.writerow([f"--- TOP {top_n} NODES WITH HIGHEST INCOMING POSITIVE EDGES ---"])
-        writer.writerow(["Node", "Incoming Positive Count", "Positive Ratio (%)", "Total Incoming"])
+        writer.writerow(
+            [f"--- TOP {top_n} NODES WITH HIGHEST INCOMING POSITIVE EDGES ---"]
+        )
+        writer.writerow(
+            ["Node", "Incoming Positive Count", "Positive Ratio (%)", "Total Incoming"]
+        )
         for item in top_positive:
-            writer.writerow([
-                item['node'], 
-                item['pos_in'], 
-                f"{item['pos_pct']:.2f}%", 
-                item['total_in']
-            ])
+            writer.writerow(
+                [
+                    get_username_by_id(item["node"]),
+                    item["node"],
+                    item["pos_in"],
+                    f"{item['pos_pct']:.2f}%",
+                    item["total_in"],
+                ]
+            )
 
     print("Done.")
 
 
+def get_username_by_id(user_id):
+    # API endpoint for English Wikipedia
+    url = "https://en.wikipedia.org/w/api.php"
 
+    # Parameters for the API query
+    params = {
+        "action": "query",
+        "format": "json",
+        "list": "users",
+        "ususerids": user_id,  # The ID you want to look up
+    }
+
+    try:
+        # headers are recommended by Wikimedia to identify your script
+        headers = {"User-Agent": "FetchUsernameByIDScript/1.0"}
+
+        response = requests.get(url, params=params, headers=headers)
+        data = response.json()
+
+        # Navigate the JSON response
+        # Structure: {'query': {'users': [{'userid': 123, 'name': 'Username'}]}}
+        users = data.get("query", {}).get("users", [])
+
+        if users:
+            user = users[0]
+            # Check if the 'name' key exists (it might be 'missing' if ID is invalid)
+            if "name" in user:
+                return user["name"]
+            else:
+                return "User not found (Invalid ID)"
+        else:
+            return "No data returned"
+
+    except Exception as e:
+        return f"An error occurred: {e}"
+
+
+def export_users_by_id(G: nx.DiGraph, output_file="users.csv"):
+    with open(output_file, mode="w", encoding="utf-8") as f:
+        for user_id in G.nodes():
+            username = get_username_by_id(user_id)
+            if "User not found" not in username and "An error" not in username:
+                f.write(f"{user_id},{username}\n")
+                print(f"Saved: {user_id} -> {username}")
+            else:
+                print(f"Skipped invalid ID: {user_id}")
+            
+            # 3. Rate limiting (Essential for loops)
+            time.sleep(0.1)
