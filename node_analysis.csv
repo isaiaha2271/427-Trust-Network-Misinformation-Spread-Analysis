@@ -1,4 +1,4 @@
---- TOP 10 NODES WITH HIGHEST INCOMING NEGATIVE EDGES ---
+--- TOP 100 NODES WITH HIGHEST INCOMING NEGATIVE EDGES ---
 Node,Incoming Negative Count,Negative Ratio (%),Total Incoming
 Eean,112,2608,27.99%,9316
 Taw,97,807,25.68%,3142
@@ -10,8 +10,98 @@ Mitke~enwiki,564,227,83.15%,273
 Codeczero,448,179,26.64%,672
 Yooden,765,173,16.00%,1081
 Gorm,250,164,55.41%,296
+Bluefusion,7300,143,60.85%,235
+Benwbrum,337,138,45.54%,303
+Bronger,8268,138,99.28%,139
+Deden~enwiki,1635,136,39.77%,342
+Creimerman,8165,136,47.22%,288
+Impreza~enwiki,2658,134,26.64%,503
+Bisu2000,2342,133,20.68%,643
+B2k4eva,3478,132,38.60%,342
+Tinku~enwiki,1713,130,21.63%,601
+Ortner,640,124,65.26%,190
+Katzensack,352,117,13.54%,864
+Oweaver,18089,113,99.12%,114
+Peripathetic,23416,113,100.00%,113
+M5m5m,50233,113,100.00%,113
+ILVI,8271,112,100.00%,112
+Ry Rivard,225,111,49.55%,224
+Bookworm226,9730,111,67.27%,165
+Mike (usurped),572,107,46.52%,230
+Chalks99,471,105,44.49%,236
+Warp~enwiki,13811,105,99.06%,106
+Brant Boucher,963,98,36.84%,266
+User not found (Invalid ID),2255,97,35.93%,270
+Dha (usurped)~enwiki,13682,97,98.98%,98
+Smoogle,36399,97,98.98%,98
+Charleschuck,169,94,16.82%,559
+Hoantmbg,687,94,13.66%,688
+King of birds,87,92,27.96%,329
+Trimalchio,220,92,4.90%,1876
+Ping,8833,92,47.92%,192
+NEAL DAVIS,1461,89,34.36%,259
+Jornhj~enwiki,409,88,23.40%,376
+Redrobot~enwiki,628,87,4.50%,1933
+The Doctor (usurped),2880,87,53.05%,164
+Raster~enwiki,999,85,96.59%,88
+Redtrain,2447,85,31.95%,266
+Justagirl83,2481,84,37.00%,227
+Moritz0254,5544,84,48.84%,172
+Graham Chapman,380,83,4.12%,2013
+Dsblank,566,83,56.85%,146
+Aarrrggghhh,6540,82,45.05%,182
+Bart~enwiki,7978,81,90.00%,90
+ReGina,904,80,27.21%,294
+Warren (usurped),10672,80,66.12%,121
+46gabrielau,45905,80,91.95%,87
+500514164,59275,78,98.73%,79
+Vtan,84,76,15.54%,489
+The Ostrich,1125,76,52.41%,145
+Reza shirkoohi,1931,76,9.35%,813
+Jimbo 2002,3367,75,19.48%,385
+ClaudineChionh,221,73,51.77%,141
+Girlich,131,71,5.71%,1244
+Aoineko,1609,69,7.32%,942
+Nagarajan,1765,69,22.85%,302
+Mazzy,3203,69,8.69%,794
+Fedora~enwiki,670,67,15.76%,425
+Maria1963,5032,66,30.28%,218
+Lgarvin,905,65,41.40%,157
+Johnlf,2380,64,39.02%,164
+Ckcinde,4594,63,46.67%,135
+Satellitequeen,262,62,35.84%,173
+Mardiverdeonline.com,3440,62,22.06%,281
+JayCampbell,3725,62,46.27%,134
+N2fish,9208,62,44.29%,140
+Greta007,30412,62,59.62%,104
+School~enwiki,625,61,6.50%,938
+User not found (Invalid ID),2641,61,27.35%,223
+Guy~enwiki,2789,61,32.45%,188
+SilentDoug,5723,61,31.94%,191
+Luvvdupp,689,60,19.23%,312
+ArloBee,11189,60,35.71%,168
+Petriw~enwiki,23415,60,96.77%,62
+Law (usurped),399,59,6.05%,975
+Grabiec,985,59,9.61%,614
+Jim McKeeth,3944,58,31.02%,187
+Patrickc~enwiki,647,57,15.62%,365
+Valhague,801,57,28.22%,202
+Augusto Buonafalce,35194,57,100.00%,57
+User not found (Invalid ID),360,56,13.66%,410
+Erwinelloso,1711,56,25.81%,217
+User not found (Invalid ID),1821,55,94.83%,58
+Doj~enwiki,1977,55,33.33%,165
+M khedr1,2167,55,28.65%,192
+Galina~enwiki,58938,55,98.21%,56
+Philo~enwiki,208,54,14.63%,369
+Hasidm,9603,54,45.76%,118
+Tal642,58874,54,100.00%,54
+Brian27909,577,53,6.39%,829
+Nsmishko,1151,53,18.86%,281
+Danb~enwiki,1658,53,11.78%,450
+Ryan (usurped)~enwiki,3461,53,14.85%,357
 
---- TOP 10 NODES WITH HIGHEST INCOMING POSITIVE EDGES ---
+--- TOP 100 NODES WITH HIGHEST INCOMING POSITIVE EDGES ---
 Node,Incoming Positive Count,Positive Ratio (%),Total Incoming
 Eean,112,6708,72.01%,9316
 Ramesh,314,5679,95.57%,5942
@@ -23,3 +113,93 @@ Trimalchio,220,1784,95.10%,1876
 Icydee,229,1591,73.86%,2154
 Uriel (usurped),456,1494,97.39%,1534
 Roholl,401,1415,96.52%,1466
+R voogd,313,1407,98.46%,1429
+Rozallin,404,1282,96.17%,1333
+Absecon 59,1176,1269,96.80%,1311
+Clifford Adams,95,1245,72.93%,1707
+Edsonmedina,411,1194,97.39%,1226
+Girlich,131,1173,94.29%,1244
+Brittocj,451,966,96.12%,1005
+Discovery~enwiki,406,931,94.71%,983
+Law (usurped),399,916,93.95%,975
+Yooden,765,908,84.00%,1081
+HobbyShop~enwiki,140,893,95.61%,934
+Xao~enwiki,3871,880,97.13%,906
+School~enwiki,625,877,93.50%,938
+Aoineko,1609,873,92.68%,942
+ArtSchoolGirl,766,813,97.48%,834
+Dan-wie,2217,792,94.85%,835
+Sand~enwiki,303,780,98.98%,788
+Brian27909,577,776,93.61%,829
+Katzensack,352,747,86.46%,864
+Reza shirkoohi,1931,737,90.65%,813
+Mazzy,3203,725,91.31%,794
+Darchiba,797,681,94.32%,722
+Repensek,2019,641,95.81%,669
+Carolyn~enwiki,1811,632,97.23%,650
+Hoantmbg,687,594,86.34%,688
+Mititim,923,583,96.52%,604
+TimeW,1725,576,92.90%,620
+Mauritz~enwiki,2466,561,95.57%,587
+Y siddiquiwww.com,1319,558,97.72%,571
+Grabiec,985,555,90.39%,614
+Type3vw71,568,535,95.03%,563
+Test~enwiki,2118,531,94.82%,560
+An mo,194,522,96.85%,539
+Sanjeevdivekar,1607,515,95.90%,537
+Bisu2000,2342,510,79.32%,643
+Pidandan,799,501,97.85%,512
+Joeygoey,794,500,95.24%,525
+Jef Boven,343,496,94.48%,525
+Dascott,395,493,95.54%,516
+Codeczero,448,493,73.36%,672
+Glshadbolt,2472,488,95.69%,510
+Jinian,3114,481,99.18%,485
+Roel 14,863,480,93.20%,515
+Daan~enwiki,2410,478,91.40%,523
+Dvusboy,864,473,93.11%,508
+Umite~enwiki,1816,473,91.49%,517
+Tinku~enwiki,1713,471,78.37%,601
+Befalas,778,466,96.88%,481
+Charleschuck,169,465,83.18%,559
+User not found (Invalid ID),806,464,95.87%,484
+Trimachio,219,453,98.26%,461
+Dgraham,988,446,90.28%,494
+Ortolan88,1325,434,91.18%,476
+Setu (usurped),312,433,97.30%,445
+Mistress~enwiki,1314,423,96.58%,438
+BlackSwan9,3443,422,93.99%,449
+KDE1939,2291,419,94.16%,445
+Azrael~enwiki,2574,419,96.99%,432
+Gerry Brady,365,417,95.64%,436
+Darkforce~enwiki,3092,416,96.97%,429
+Harivijay,1184,415,96.06%,432
+Vtan,84,413,84.46%,489
+Ellie~enwiki,1817,406,92.91%,437
+D,4471,403,91.80%,439
+Danb~enwiki,1658,397,88.22%,450
+Knb7d,2727,397,97.78%,406
+Fritzlein,856,396,92.96%,426
+Bobbyhinojosa,2471,387,97.97%,395
+Ant,2023,376,94.95%,396
+Girli,2919,373,92.10%,405
+Impreza~enwiki,2658,369,73.36%,503
+Steven~enwiki,567,363,97.06%,374
+Seekyn,1547,360,96.77%,372
+Fedora~enwiki,670,358,84.24%,425
+User not found (Invalid ID),360,354,86.34%,410
+Mike Hough,3049,353,95.66%,369
+User not found (Invalid ID),1938,347,89.66%,387
+Ddrii1,982,346,93.26%,371
+Ebhook,740,345,95.83%,360
+Lsyy~enwiki,253,342,86.80%,394
+Closely,603,341,95.79%,356
+Coolshoya,1687,341,88.11%,387
+Qqchen79,3477,340,96.32%,353
+Aino~enwiki,1544,336,92.56%,363
+Voxing,816,335,95.17%,352
+Feelicks,2690,333,96.80%,344
+The Epopt,30,329,97.05%,339
+Snorre,308,329,94.54%,348
+Danmelton,3016,328,98.20%,334
+Puzka,890,322,92.00%,350
